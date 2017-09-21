@@ -3,14 +3,17 @@
         <div id="mainBox1"></div>
         <h1>{{message}}</h1>
         <button @click="addJs">异步加载js按钮</button>
+        <Lines :data="data"></Lines>
     </div>
 </template>
 <script>
-	import echarts from 'echarts'
+	import echarts from 'echarts';
+	import Lines from "./lines.vue";
 	export default {
 		data: function () {
 			return {
 				message: "listone",
+				data:[1, 11, 15, 13, 12, 13, 10],
 			}
 		},
 		methods: {
@@ -37,6 +40,9 @@
 				})
             }
 		},
+        components:{
+	        Lines
+        },
 		mounted() {
 			this.$nextTick(function() {
 				this.doDraw('mainBox1')
