@@ -12,5 +12,33 @@
 </head>
 <body>
 <div id="app"></div>
+<div>
+    <input type="text" onChange="formatCurrency()">
+    <input type="text" value="这是内容" placeholder="请输入" autofocus>
+    <textarea rows="3" cols="20">
+在w3school，你可以找到你所需要的所有的网站建设教程。
+</textarea>
+</div>
+<script type="text/javascript">
+	var currying = function(fun) {
+		//格式化arguments
+        console.log(arguments);
+		var args = Array.prototype.slice.call(arguments, 1);
+		console.log(args);
+		return function() {
+			//收集所有的参数在同一个数组中，进行计算
+			var _args = args.concat(Array.prototype.slice.call(arguments));
+			return fun.apply(null, _args);
+		};
+	};
+	var add = currying(function() {
+		console.log(arguments);
+		var args = Array.prototype.slice.call(arguments);
+		console.log(args);
+		return args.reduce(function(a, b) {
+			return a + b;
+		});
+	});
+</script>
 </body>
 </html>
