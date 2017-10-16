@@ -6,35 +6,25 @@
 	export default {
 		data() {
 			return {
-
-			}
-		},
-        props:{
-			data:{
-				type:Array
-            }
-        },
-		methods: {
-			drawPie (id) {
-				this.chart = echarts.init(document.getElementById(id));
-				const options = {
+				chart: null,
+				options: {
 					title: [
 						{text: '标题',x:'left',show: true},
-                        {subtext: '副标题',x:'center',show:true,padding:[20, 0, 0, 0]}
-                        ],
-                    grid:{
+						{subtext: '副标题',x:'center',show:true,padding:[20, 0, 0, 0]}
+					],
+					grid:{
 						show:false,
-                        top:100,
-                        left:80,
-                        right:80,
-                        bottom:80
-                    },
+						top:100,
+						left:80,
+						right:80,
+						bottom:80
+					},
 					tooltip: {
 						trigger: 'item',
 						triggerOn: 'click',
 						position: "top",
 						backgroundColor: 'pink',
-                        padding: [5,5,5,5],
+						padding: [5,5,5,5],
 
 					},
 //					brush: {
@@ -60,19 +50,19 @@
 //					},
 					xAxis:  {
 						type: 'category',
-					//	boundaryGap: false,
-                        position:'bottom',
-                        name:'x轴',
-                        nameLocation:'end',
-                        nameTextStyle:{
+						//	boundaryGap: false,
+						position:'bottom',
+						name:'x轴',
+						nameLocation:'end',
+						nameTextStyle:{
 							color:'red'
-                        },
+						},
 						axisTick: {
 							show:true,
-                        },
+						},
 						splitLine:{
 							show:false,
-                        },
+						},
 						data: [{
 							value: '周一',
 							// 突出周一
@@ -89,29 +79,56 @@
 						},
 						splitLine:{
 							show:true,
-                            lineStyle:{
+							lineStyle:{
 								type: "dashed",
-                            }
+							}
 						},
-                        min:0,
-                        max:20
+//						min:0,
+//						max:20
 					},
 					series: [
 						{
 							name:'最高气温',
 							type:'line',
-                            lineStyle:{
+							//	symbol:"triangle",
+							//	symbolSize:0,
+							lineStyle:{
 								normal:{
 									type:'solid',
 									color: "red",
-                                    width: 5,
-                                }
-                            },
+									width: 5,
+								}
+							},
 							data:this.data,
 						}
 					]
-				};
-				this.chart.setOption(options)
+				}
+			}
+		},
+        props:{
+			data:{
+				type:Array
+            }
+        },
+        watch:{
+			data:function (newVal) {
+				if(this.chart){
+					this.options.series[0].data = this.data;
+					this.chart.clear();
+					this.options.series[0].data = newVal;
+					console.log(newVal,22222222222222222222222222);
+					this.chart.setOption(this.options);
+                }
+			}
+        },
+        created(){
+	        this.options.series[0].data = this.data;
+	        console.log(22222222222222222222222222);
+        },
+		methods: {
+			drawPie (id) {
+				this.chart = echarts.init(document.getElementById(id));
+				this.chart.setOption(this.options);
 			}
 		},
 		mounted() {

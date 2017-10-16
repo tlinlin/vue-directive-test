@@ -6,6 +6,9 @@
         <router-link to="/fileUp">fileUp</router-link>
         <router-link to="/drag">drag</router-link>
         <router-link to="/EChartsLines"><h3>EChartsLines</h3></router-link>
+        <router-link to="/MultiLine"><h3>MultiLine</h3></router-link>
+        <router-link to="/excels"><h3>excels</h3></router-link>
+        <router-link to="/ParentCom"><h3>ParentCom</h3></router-link>
         <router-view></router-view>
     </div>
 </template>

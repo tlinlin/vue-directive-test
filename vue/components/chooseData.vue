@@ -1,7 +1,7 @@
 <template>
     <div class="itemSelect">
         <div>
-            <select name="itemType" v-model = "selectItem">
+            <select name="itemType" v-model = "selectItem" @change="selectData">
                 <option value="1">one</option>
                 <option value="2">two</option>
                 <option value="3">three</option>
@@ -21,7 +21,7 @@
 		data: function () {
 			return {
 				selectItem:'',
-                startTime: new Date(),
+                startTime: '',
 			}
 		},
         computed:{
@@ -35,13 +35,22 @@
 	            return date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
             }
         },
+        created(){
+	        this.startTime = new Date();
+	        this.$emit("changeData","传出的数据created");
+	        console.log(this.$parent,this.$children,"=================================================组件")
+        },
         methods:{
+	        selectData(){
+                this.$emit("changeData","传出的数据")
+            },
 	        prev(){
 	        	console.log("点击前一星期");
                 const date = this.startTime;
 		        const newDate = new Date(date.setDate(date.getDate()-7));
 		        this.startTime = newDate;
 		        console.log(newDate);
+		        this.$emit("changeData","传出的数据1")
             },
 	        next(){
 		        console.log("点击后一星期");
@@ -49,6 +58,7 @@
 		        const newDate = new Date(date.setDate(date.getDate()+7));
 		        this.startTime = newDate;
 		        console.log(newDate);
+		        this.$emit("changeData","传出的数据2")
             }
         }
 	}

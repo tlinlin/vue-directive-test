@@ -3,7 +3,7 @@
         <form method="post" enctype="multipart/form-datad">
             <input type="text" v-model="form.one">
             <input type="text" v-model="form.two">
-            <input type="text" v-model="form.three">
+            <input type="text" v-model="form.three" v-focus>
             <input type="text" v-model="form.four">
             <button type="button" @click="save">提交</button>
         </form>
@@ -66,6 +66,15 @@
 	            return (((sign)?'':'-') + num + '.' + cents);
             }
 
+		},
+		directives:{
+			focus:{
+				inserted: function (el) {
+					// 聚焦元素
+                    console.log(11111111111);
+					el.focus()
+				}
+			}
 		}
 	}
 </script>

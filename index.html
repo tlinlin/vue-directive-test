@@ -20,6 +20,14 @@
 </textarea>
 </div>
 <script type="text/javascript">
+	for (var i = 0; i < 5; i++) {
+		console.log(i);
+		setTimeout(function() {
+			console.log(new Date, i);
+		}, 1000);
+	}
+	console.log(i,"+++++=11111");
+	console.log(new Date, i);
 	var currying = function(fun) {
 		//格式化arguments
         console.log(arguments);
